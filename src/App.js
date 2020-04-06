@@ -1,17 +1,80 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-//Componentes import
 import Person from './Person/Person';
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Does this work?</h1>
-      <Person name="Juan Felipe"/>
-      <Person name= "Geraldine Chavez"/>
-      <Person name= "Juan Nicolas"/>
-    </div>
-  );
+class App extends Component {
+  state = {
+    persons: [
+      { name: 'Max', age: 28 },
+      { name: 'Manu', age: 29 },
+      { name: 'Stephanie', age: 26 }
+    ],
+    otherState: 'some other value',
+    showPersons: false 
+  }
+
+  switchNameHandler = (newName) => {
+    // console.log('Was clicked!');
+    // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
+    this.setState( {
+      persons: [
+        { name: newName, age: 28 },
+        { name: 'Manu', age: 29 },
+        { name: 'Stephanie', age: 27 }
+      ]
+    } )
+  }
+
+  nameChangedHandler = (event) => {
+    this.setState( {
+      persons: [
+        { name: 'Max', age: 28 },
+        { name: event.target.value, age: 29 },
+        { name: 'Stephanie', age: 26 }
+      ]
+    } )
+  }
+
+  //Handler para mostrar las personas y ocultarlas
+  showPersonsHandler = () => {
+    const actual_state = this.state.showPersons;
+    this.setState ({
+     showPersons: !actual_state 
+    });
+  }
+
+  render () {
+    return (
+      <div className="App">
+        <h1>Hi, I'm a React App Udemy Course</h1>
+        <p>This is really working!</p>
+        <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name</button>
+        <button onClick={this.showPersonsHandler}>Show Persons</button>
+        {
+          /** 
+           *Condicion que verifica si se deben o no mostrar las personas
+           *Tipo de condiciones usando expresiones terninarias 
+          */
+          this.state.showPersons ?
+            <div>
+              <Person 
+                name={this.state.persons[0].name} 
+                age={this.state.persons[0].age} />
+              <Person 
+                name={this.state.persons[1].name} 
+                age={this.state.persons[1].age}
+                click={this.switchNameHandler.bind(this, 'Max!')}
+                changed={this.nameChangedHandler} >My Hobbies: Racing</Person>
+              <Person 
+                name={this.state.persons[2].name} 
+                age={this.state.persons[2].age} />
+            </div>
+          :null
+        }
+      </div>
+    );
+    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
+  }
 }
 
 export default App;
