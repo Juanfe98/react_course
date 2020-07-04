@@ -1,19 +1,14 @@
 import React from 'react';
+//Los css se deben importar donde se van a utilizar
 import './Person.css';
-
-const Person =  (props) => {
+const person = ( props ) => {
     return (
         <div className="person">
-            <h1>Hello, i'm a {props.name}</h1>
-            <h2>This is my information</h2>
-            <label for="name">Name:</label>
-            <input type="text" value="prueba"/>
-            <label for="id">Id Number:</label>
-            <input type="number" value="123"/>
-            <label for="age">Age:</label>
-            <input type="text" value="prueba_age"/>
+            <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
+            <p>{props.children}</p>
+            <input type="text" onChange={props.changed} value={props.name} />
         </div>
     )
+};
 
-}
-export default Person
+export default person;

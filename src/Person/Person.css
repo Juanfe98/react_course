@@ -1,9 +1,17 @@
+/* creacion de una clase css para el component person */
 .person{
-    border: 2px solid #000000;
+    border: 2px solid #fff;
     padding: 2%;
-    box-shadow: #000000;
-    width: 60%;
-    margin: auto;
-    margin-bottom: 2%;
+    box-shadow: 0 2px 2px;
+    width: 30%;
+    margin:16px auto;
     border-radius: 15px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.red{
+    color: red;
 }
