@@ -71,6 +71,17 @@ class App extends Component {
     /**
      * Segunda manera de condicionar y hacer el contenido dinamico.
      */
+    //Se define el estilo para el boton show persons
+    const showPersonStyles = {
+      backgroundColor: 'green',
+      color: 'white',
+      font: 'inherit',
+      cursor: 'pointer',
+      border: '1px solid blue',
+      padding: '8px',
+    }
+    //Cambio de estilos dinamicamente con clases.
+    const classes = [];
     let persons = null;
     if (this.state.showPersons){
       persons = (
@@ -91,13 +102,25 @@ class App extends Component {
           }
         </div>
       )
+        //Cambiamos el valor del objeto showPersonStyles, con la finalidad de que el boton se muestre
+        //rojo y verde dependiendo si se van a mostrar u ocultar las personas
+        showPersonStyles.backgroundColor ="red";
+    }
+
+    //Dependiendo de cuantas personas hay se le insertan las clases al arreglo classes.
+    if(this.state.persons.length <= 2){
+      classes.push('red');
+    }
+    if(this.state.persons.length <= 1){
+      classes.push('bold');
     }
     return (
       <div className="App">
         <h1>Hi, I'm a React App Udemy Course</h1>
-        <p>This is really working!</p>
+        {/* Se hace un join al arreglo clases para que quede asi -> clase1 clase2 */}
+        <p className={classes.join(" ")}>This is really working!</p>
         <button onClick={() => this.switchNameHandler('Maximilian!!')}>Switch Name</button>
-        <button onClick={this.showPersonsHandler}>Show Persons</button>
+        <button style={showPersonStyles} onClick={this.showPersonsHandler}>Show Persons</button>
         {
           //Segunda manera de condicionar el contenido
           persons
