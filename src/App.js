@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import Radium from 'radium';
 
 class App extends Component {
   state = {
@@ -79,6 +80,12 @@ class App extends Component {
       cursor: 'pointer',
       border: '1px solid blue',
       padding: '8px',
+      // Al incorporar radium al proyecto podemos usar pseudo selectos y media querys css en los componentes.
+      // de la siguiente manera.
+      ':hover': {
+        backgroundColor: 'yellow',
+        color: 'black'
+      }
     }
     //Cambio de estilos dinamicamente con clases.
     const classes = [];
@@ -105,6 +112,11 @@ class App extends Component {
         //Cambiamos el valor del objeto showPersonStyles, con la finalidad de que el boton se muestre
         //rojo y verde dependiendo si se van a mostrar u ocultar las personas
         showPersonStyles.backgroundColor ="red";
+        //Cambiamos el estilo del pseudo selector, como es un string tenemos que poner ['pseudo_selector'] para acceder a el
+        showPersonStyles[':hover'] = {
+          backgroundColor: 'blue',
+          color: 'white',
+        }
     }
 
     //Dependiendo de cuantas personas hay se le insertan las clases al arreglo classes.
@@ -150,4 +162,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
